@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "nm-memegen": {
+      "hosting": {
+        "meme-generator": [
+          "nm-memegen"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "nm-memegen"
+  }
+}

@@ -14,6 +14,8 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromState from './shared/data-access';
 import * as fromMeme from './memes/data-access/meme.reducer';
 import { MemeEffects } from './memes/data-access/meme.effects';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -23,15 +25,20 @@ import { MemeEffects } from './memes/data-access/meme.effects';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
-    StoreModule.forFeature(fromState.stateFeatureKey, fromState.reducers, { metaReducers: fromState.metaReducers }),
+    StoreModule.forFeature(fromState.stateFeatureKey, fromState.reducers, {metaReducers: fromState.metaReducers}),
     StoreModule.forFeature(fromMeme.memeFeatureKey, fromMeme.reducer),
     EffectsModule.forFeature([MemeEffects]),
+
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

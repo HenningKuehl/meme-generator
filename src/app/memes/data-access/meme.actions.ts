@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import {ImgflipMeme} from "./models/imgflip-meme";
 
 export const loadMemes = createAction(
   '[Meme] Load Memes'
@@ -6,7 +7,7 @@ export const loadMemes = createAction(
 
 export const loadMemesSuccess = createAction(
   '[Meme] Load Memes Success',
-  props<{ data: any }>()
+  props<{ memes: ImgflipMeme[] }>()
 );
 
 export const loadMemesFailure = createAction(

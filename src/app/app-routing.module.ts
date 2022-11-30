@@ -4,14 +4,15 @@ import {RouterModule, Routes} from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/create'
+    redirectTo: 'create',
+    pathMatch: 'full'
   },
   {
-    path: '/create',
+    path: 'create',
     loadChildren: () => import('./memes/features/create/create.module').then(m => m.CreateModule)
   },
   {
-    path: '/gallery',
+    path: 'gallery',
     loadChildren: () => import('./memes/features/gallery/gallery.module').then(m => m.GalleryModule)
   }
 ];

@@ -11,11 +11,14 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import * as fromState from './shared/data-access';
-import * as fromMeme from './memes/data-access/meme.reducer';
 import { MemeEffects } from './memes/data-access/meme.effects';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {HttpClientModule} from "@angular/common/http";
+import {memeReducer} from "./memes/data-access/meme.reducer";
+import {FlexModule} from "@angular/flex-layout";
+import {FormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -32,13 +35,13 @@ import {HttpClientModule} from "@angular/common/http";
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
 
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
-    StoreModule.forFeature(fromState.stateFeatureKey, fromState.reducers, {metaReducers: fromState.metaReducers}),
-    StoreModule.forFeature(fromMeme.memeFeatureKey, fromMeme.reducer),
-    EffectsModule.forFeature([MemeEffects]),
+    StoreModule.forRoot({meme: memeReducer}, {}),
+    EffectsModule.forRoot([MemeEffects]),
 
     MatToolbarModule,
+    FlexModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

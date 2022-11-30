@@ -1,1 +1,43 @@
-<p>create works!</p>
+<h2>Create your own meme</h2>
+<div *ngIf="status$ | async as status" fxLayout="row">
+  <div class="preview" fxLayout="column">
+    <div class="selected-meme">
+      <img *ngIf="selectedMeme" [src]="selectedMeme.url">
+      <div fxLayout="row" fxLayoutAlign="center center" class="nothing-selected-hint">
+        <span *ngIf="!selectedMeme">Select a meme from the templates or upload your own image.</span>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column">
+    <h3>Templates</h3>
+    <div class="meme-templates" fxLayout="row">
+      <mat-spinner
+        *ngIf="status === 'loading' || status === 'pending'; else memeTemplates"
+        mode="indeterminate"
+        color="primary"
+        diameter="25"
+      ></mat-spinner>
+    </div>
+    <div class="text-boxes" *ngIf="selectedMeme">
+      <h3>Text Boxes</h3>
+      <mat-form-field class="text-box" appearance="fill">
+        <mat-label>Text #0</mat-label>
+        <input matInput type="text" [(ngModel)]="text0">
+      </mat-form-field>
+      <mat-form-field class="text-box" appearance="fill">
+        <mat-label>Text #1</mat-label>
+        <input matInput type="text" [(ngModel)]="text1">
+      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button color="primary">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #memeTemplates>
+  <ng-container *ngIf="memes$ | async as memes">
+    <img *ngFor="let meme of memes" [src]="meme.url" class="meme-template" (click)="selectMeme(meme)">
+  </ng-container>
+</ng-template>

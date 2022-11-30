@@ -1,27 +1,81 @@
-# MemeGenerator
+# Meme Generator
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
+Fullstack Developer Challenge during application process for [New Monday](https://www.newmonday.co/).
 
-## Development server
+## Development
+Run `ng serve` to access development version on `http://localhost:4200`.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng build -c production` to build project.
 
-## Code scaffolding
+## Documentation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Technology Stack
 
-## Build
+ - [Angular](https://angular.io)
+   - [Angular Material](https://material.angular.io/)
+   - [Angular Flex Layout](https://github.com/angular/flex-layout)
+   - [Ngrx State Management](https://ngrx.io/)
+ - [Firebase](https://firebase.google.com/)
+   - [Hosting](https://firebase.google.com/products/hosting)
+   - _[Firestore](https://firebase.google.com/products/firestore) (Future)_
+   - _[Authentication](https://firebase.google.com/products/auth) (Future)_
+   - _[Storage](https://firebase.google.com/products/storage) (Future)_
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Frontend Framework
+I decided to use Angular because this is my favourite framework.
+And I have the best knowledge to build easy and fast a good single page application.
 
-## Running unit tests
+To have from the start a good UI, I used Angular Material.
+With this library it's very easy to build a good-looking web app.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+For a good and responsive layout I used Angular Flex Layout.
+It's a helper to use flex layout with Angular.
 
-## Running end-to-end tests
+To set a good basic for future features I installed ngrx to use it for state management.
+Especially for features like the gallery 
+and managing personal memes it's a big advantage to have a good state management.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Backend Framework
+Due to not enough time I didn't build a backend.
+But I would choose to write simple Firebase Functions with Node.js and TypeScript.
+Most of the use cases can be handled direct via the web app and Firebase. 
+And for all other use cases are microservices a good solution.
 
-## Further help
+The first function I want to write would be the applying of captions for the meme.
+I would not recommend to make this api all direct from the web app,
+because the username and the password are required.
+I would store the credentials in the Google Cloud Secret Manager
+and access them in the backend to have a high security standard.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Database
+For the database I would choose Firestore,
+because it's very easy to access in the web app
+and for most of the use cases I don't need to access a backend.
+I think that is very good for smaller applications like this one,
+but is also very good for scaling if the app grows in the future.
+
+The database would be secured with the Firestore rules
+and authenticated with Firebase Authentication.
+
+### Architecture
+
+#### Folder Structure
+
+For every area I create an own folder like `/memes` or maybe `/account` in the future.
+In these folders I always use the same structure:
+
+ - `/data-access` - For handling all data stuff like state management and services.
+ - `/features` - Separate folders for every page. Each page gets also an own module.
+ - `/ui` - Ui components which are used in the feature pages. Every Ui component is a standalone component.
+
+The `/shared` folder has the same structure 
+and is for stuff that used from all areas.
+
+#### General
+In general, I would access the database direct via the web app to firebase.
+Also, the authentication.
+For some further features like the meme captioning I would call a Firebase function.
+
+### Delivery
+The web app is available on [https://nm-memegen.web.app/](https://nm-memegen.web.app/).
+The code is hosted with Firebase Hosting.
